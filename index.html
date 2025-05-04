@@ -51,26 +51,27 @@
   <div id="output"></div>
   <div id="congrats"></div>
 
-  <script>
-    // Global flag
-    var flag = "CTF{XSS_FILTERS_ARE_TRICKY}";
+<script>
+  // Global flag
+  var flag = "CTF{XSS_FILTERS_ARE_TRICKY}";
 
-    // Filter user input
-    document.getElementById("xssForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      let input = document.getElementById("inputField").value;
-      input = input.replace(/<script>|alert|onerror|onload/gi, "");
+  // Filter user input
+  document.getElementById("xssForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let input = document.getElementById("inputField").value;
+    input = input.replace(/<script>|alert|onerror|onload/gi, "");
 
-      document.getElementById("output").innerHTML = "Hello, " + input;
-    });
+    document.getElementById("output").innerHTML = "Hello, " + input;
+  });
 
-    // Function attacker calls via XSS payload
-    function getFlag() {
-      document.getElementById("congrats").style.display = "block";
-      document.getElementById("congrats").innerText =
-        "🎉 Congratulations! You've captured the flag: " + flag;
-    }
-  </script>
+  // Function called via XSS
+  function getFlag() {
+    prompt("🎉 Congratulations! Here's your flag:", flag); // ✅ popup box
+    document.getElementById("congrats").style.display = "block";
+    document.getElementById("congrats").innerText =
+      "🎉 Congratulations! You've captured the flag: " + flag;
+  }
+</script>
 
 </body>
 </html>
