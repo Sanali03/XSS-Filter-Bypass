@@ -26,6 +26,15 @@
       padding: 15px;
       border: 1px solid #ccc;
     }
+    #congrats {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -40,20 +49,27 @@
   </form>
 
   <div id="output"></div>
+  <div id="congrats"></div>
 
   <script>
-    // Global flag for the challenge
+    // Global flag
     var flag = "CTF{XSS_FILTERS_ARE_TRICKY}";
 
+    // Filter user input
     document.getElementById("xssForm").addEventListener("submit", function(e) {
       e.preventDefault();
       let input = document.getElementById("inputField").value;
-
-      // Basic filter trying to stop XSS
       input = input.replace(/<script>|alert|onerror|onload/gi, "");
 
       document.getElementById("output").innerHTML = "Hello, " + input;
     });
+
+    // Function attacker calls via XSS payload
+    function getFlag() {
+      document.getElementById("congrats").style.display = "block";
+      document.getElementById("congrats").innerText =
+        "🎉 Congratulations! You've captured the flag: " + flag;
+    }
   </script>
 
 </body>
