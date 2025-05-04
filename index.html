@@ -52,10 +52,15 @@
   <div id="congrats"></div>
 
 <script>
-  // Global flag
   var flag = "CTF{XSS_FILTERS_ARE_TRICKY}";
 
-  // Filter user input
+  function getFlag() {
+    prompt("🎉 Congratulations! Here's your flag:", flag);
+    document.getElementById("congrats").style.display = "block";
+    document.getElementById("congrats").innerText =
+      "🎉 Congratulations! You've captured the flag: " + flag;
+  }
+
   document.getElementById("xssForm").addEventListener("submit", function(e) {
     e.preventDefault();
     let input = document.getElementById("inputField").value;
@@ -63,14 +68,6 @@
 
     document.getElementById("output").innerHTML = "Hello, " + input;
   });
-
-  // Function called via XSS
-  function getFlag() {
-    prompt("🎉 Congratulations! Here's your flag:", flag); // ✅ popup box
-    document.getElementById("congrats").style.display = "block";
-    document.getElementById("congrats").innerText =
-      "🎉 Congratulations! You've captured the flag: " + flag;
-  }
 </script>
 
 </body>
